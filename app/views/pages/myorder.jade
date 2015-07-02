@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			table.table.table-hover.table-bordered
+				thead
+					tr
+						th 订单号
+						th 联系人
+						th 联系电话
+						th 送货地址
+						th 下单时间
+						th 操作
+						
+				tbody
+					each item in orders
+						tr(class="item-id-#{item._id}")
+							td #{item._id}
+							td #{item.linkman}
+							td #{item.phone}
+							td #{item.address}
+							td #{moment(item.meta.updateAt).format('YYYY-MM-DD hh:mm:ss')}
+							td: a(href="/orderdetail/#{item._id}") 查看
+			nav.page
+				ul.pagination
+					each page in pages
+						li.pages
+							a(href="/user/myorder?page=#{page}") #{page}

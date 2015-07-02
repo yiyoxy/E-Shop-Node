@@ -1,0 +1,15 @@
+extends ../layout1
+
+block content
+	.container
+		.row
+			form.col-md-4.adminform(method="post",action="/admin/access")
+				h3.text-center #{title}
+				.form-group
+					label(for="signupName") 帐号
+					input#signupName.form-control(name="user[name]",type="text")
+				.form-group
+					label(for="signupPwd") 密码
+					input#signupPwd.form-control(name="user[password]",type="text")
+				.form-group
+					button.col-md-offset-10.btn.btn-primary(type="submit") 登录

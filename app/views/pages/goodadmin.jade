@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			form.form-horizontal(method="post",action="/admin/good/new")
+				input(type="hidden",name="good[_id]",value="#{good._id}")
+				.form-group
+					label.col-sm-2.control-label(for="inputType") 商品类型
+					.col-sm-10
+						input#inputType.form-control(type="text",name="good[typename]",value="#{good.typename}")
+				.form-group
+					label.col-sm-2.control-label(for="inputGoodname") 商品名称
+					.col-sm-10
+						input#inputGoodname.form-control(type="text",name="good[goodname]",value="#{good.goodname}")
+				.form-group
+					label.col-sm-2.control-label(for="inputLabel") 备注信息
+					.col-sm-10
+						input#inputLabel.form-control(type="text",name="good[label]",value="#{good.label}")
+				.form-group
+					label.col-sm-2.control-label(for="inputBcgimg") 图片地址
+					.col-sm-10
+						input#inputBcgimg.form-control(type="text",name="good[bcgimg]",value="#{good.bcgimg}")
+				.form-group
+					label.col-sm-2.control-label(for="inputPrice") 价格
+					.col-sm-10
+						input#inputPrice.form-control(type="text",name="good[price]",value="#{good.price}")
+				.form-group
+					label.col-sm-2.control-label(for="inputPostage") 运费
+					.col-sm-10
+						input#inputPostage.form-control(type="text",name="good[postage]",value="#{good.postage}")
+				.form-group
+					.col-sm-offset-2.col-sm-10
+						button.btn.btn-primary(type="submit") 修改
+	

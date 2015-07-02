@@ -1,0 +1,68 @@
+
+.navbar.navbar-default.navbar-fixed-top
+	.container
+		.navbar-header
+		if user==undefined
+			a.navbar-brand(href="/") 黄强的网络商城
+			p.navbar-text.navbar-right
+				a.navbar-link(href="#",data-toggle="modal",data-target="#signupModal1") 注册
+				span &nbsp;|&nbsp;
+				a.navbar-link(href="#",data-toggle="modal",data-target="#signupModal2") 登录
+		else if user.role==0
+			a.navbar-brand(href="/") 黄强的网络商城
+			p.navbar-text.navbar-right
+				span 欢迎您,#{user.name}
+				span &nbsp;|&nbsp;
+				span: a.navbar-link(href="/user/myorder") 我的订单
+				span &nbsp;|&nbsp;
+				span: a.navbar-link(href="/user/mycart") 我的购物车
+				span &nbsp;|&nbsp;
+				a.navbar-link(href="/user/signout") 注销
+			
+		else if user.role==1
+			a.navbar-brand(href="/admin/userlist") 商城后台管理	
+			p.navbar-text.navbar-right
+				span 欢迎您,#{user.name}
+				span &nbsp;|&nbsp;
+				a.navbar-link(href="/user/signout") 注销
+.container(style="margin-top:50px")
+	.row
+		.page-header
+			h1 #{title}
+
+#signupModal1.modal.fade
+	.modal-dialog
+		.modal-content
+			form(method="POST",action="/user/reg")
+				.modal-header 注册
+				.modal-body
+					.form-group
+						label(for="signupName") 帐号
+						input#signupName.form-control(name="user[name]",type="text")
+					.form-group
+						label(for="signupPwd") 密码
+						input#signupPwd.form-control(name="user[password]",type="text")
+					.modal-footer
+						.row
+							.col-md-6.text-center
+								button.btn.btn-lg.btn-success(type="submit") 注册
+							.col-md-6.text-center
+								button.btn.btn-lg.btn-danger(data-dismiss="modal",type="button") 关闭
+#signupModal2.modal.fade
+	.modal-dialog
+		.modal-content
+			form(method="POST",action="/user/signup")
+				.modal-header 登录
+				.modal-body
+					.form-group
+						label(for="signupName") 帐号
+						input#signupName.form-control(name="user[name]",type="text")
+					.form-group
+						label(for="signupPwd") 密码
+						input#signupPwd.form-control(name="user[password]",type="text")
+					.modal-footer
+						.row
+							.col-md-6.text-center
+								button.btn.btn-lg.btn-success(type="submit") 登录
+							.col-md-6.text-center
+								button.btn.btn-lg.btn-danger(data-dismiss="modal",type="button") 关闭

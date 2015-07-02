@@ -1,0 +1,28 @@
+extends ./admin
+
+block content
+	.col-md-10
+		.row
+			table.table.table-hover.table-bordered(style="margin-top:10px")
+				thead
+					tr
+						th 用户
+						th 订单号
+						th 下单时间
+						th 修改
+						th.text-center 操作
+				tbody
+					each item in orders
+						tr(class="item-id-#{item._id}")
+							td #{item.username}
+							td #{item._id}
+							td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+							td: a(href="/orderdetail/#{item._id}") 查看
+							td
+								button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除
+			nav.page
+				ul.pagination
+					each page in pages
+						li.pages
+							a(href="/admin/orderlist?page=#{page}") #{page}
+				script(src='/libs/js/orderlist.js')

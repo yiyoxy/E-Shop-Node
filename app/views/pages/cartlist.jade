@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			.panel.panel-danger
+				.panel-heading 我的购物车
+				.panel-body
+					.cart_title.col-md-offset-3.col-md-3.text-center 单价
+					.cart_title.col-md-2.text-center 数量
+					.cart_title.col-md-2.text-center 总价
+					.cart_title.col-md-2.text-center 操作
+				each item in carts
+					.singer_cartlist(class="item-id-#{item._id}")
+						.col-md-3.cart_imgbc
+							.col-md-6
+								img(src="#{item.bcgimg}",style="height:80px")
+								&nbsp;
+							.col-md-6
+								a(href="/good/#{item.goodid}") #{item.goodname}
+						.col-md-3.cart_price.text-center #{item.price}
+						.col-md-2.cart_math.text-center
+							button.btn.btn-primary.btn-sm.add(type="button") +
+							input.count(type="text",style="width:30px;height:29px;text-align:center",value="1")
+							button.btn.btn-primary.btn-sm.down(type="button") -
+						.col-md-2.cart_total.text-center
+						.col-md-2.text-center
+							a.btn.btn-info.btn-sm.cart_opreate.buy(data-id="#{item.goodid}") 购买
+							a.btn.btn-danger.btn-sm.cart_opreate.del(data-id="#{item._id}") 删除
+				nav.page
+					ul.pagination
+						each page in pages
+							li.pages
+								a(href="/user/mycart?page=#{page}") #{page}
+				script(src='/libs/js/cartlist.js')
+
+

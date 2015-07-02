@@ -1,0 +1,17 @@
+{
+  "name": "E-Shop-Node",
+  "version": "0.0.1",
+  "authors": [
+    "黄强 <424152733@qq.com>"
+  ],
+  "description": "good",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "publlic/libs",
+    "test",
+    "tests"
+  ]
+}

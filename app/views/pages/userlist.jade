@@ -1,0 +1,55 @@
+extends ./admin
+
+block content
+	.col-md-10
+		.row
+			a.btn.btn-primary(href="#",data-toggle="modal",data-target="#signupModal1",style="margin-top:10px") 添加用户+
+			table.table.table-hover.table-bordered(style="margin-top:10px")
+				thead
+					tr
+						th 用户名
+						th 密码
+						th 权限等级
+						th 录入时间
+						th.text-center 操作
+				tbody
+					each item in users
+						tr(class="item-id-#{item._id}")
+							td #{item.name}
+							td #{item.password}
+							if item.role==0
+								td 普通用户
+							else 
+								td 管理员
+							td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}			
+							td
+								button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除
+			nav.page
+				ul.pagination
+					each page in pages
+						li.pages
+							a(href="/admin/userlist?page=#{page}") #{page}
+	#signupModal1.modal.fade
+		.modal-dialog
+			.modal-content
+				form(method="POST",action="/admin/reg")
+					.modal-header 添加用户
+					.modal-body
+						.form-group
+							label(for="signupName") 帐号
+							input#signupName.form-control(name="user[name]",type="text")
+						.form-group
+							label(for="signupPwd") 密码
+							input#signupPwd.form-control(name="user[password]",type="text")
+						.form-group
+							label(for="signupRole") 权限等级
+							select.form-control(name="user[role]")
+								option 0
+								option 1
+						.modal-footer
+							.row
+								.col-md-6.text-center
+									button.btn.btn-lg.btn-success(type="submit") 添加
+								.col-md-6.text-center
+									button.btn.btn-lg.btn-danger(data-dismiss="modal",type="button") 关闭
+					script(src='/libs/js/userlist.js')

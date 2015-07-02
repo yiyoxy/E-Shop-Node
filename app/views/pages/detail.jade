@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			.panel.panel-info
+				.panel-body
+					.col-md-4.box
+						img.lg_imgbox(src="#{good.bcgimg}")
+					.col-md-7.explain
+						p
+							h3 #{good.goodname}
+						p #{good.label}
+						p
+							label 一口价：&nbsp; ¥ #{good.price}
+						p
+							label 运费：&nbsp; ¥ #{good.postage}
+						if !user||user.role==0
+							if user
+								a.buy.btn.btn-primary(href="/order/#{good._id}",data-id="ok") 购买
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								a.cart.btn.btn-danger(data-id="#{good._id}" data-cart="yes") 加入购物车
+							else
+								a.buy.btn.btn-primary(href="/" data-id="no") 购买
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								a.cart.btn.btn-danger(href="/" data-id="#{good._id}") 加入购物车
+
+						script(src="/libs/js/gooddetail.js")
+

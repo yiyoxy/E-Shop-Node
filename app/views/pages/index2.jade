@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			.col-md-3
+				.panel.panel-primary
+					.panel-heading 商品分类
+					.panel-body
+						ul.nav
+							each item1 in firsttypes
+								li
+									span #{item1.name}
+										ul.typelist
+											each item2 in types
+												if item1.bigid==item2.bigid
+													li: a(href='/?typename=#{item2.typename}') #{item2.typename}
+
+			.col-md-9
+				.panel.panel-success
+					.panel-heading  商品列表
+					.panel-body
+						each item in goods
+							.col-md-4.singelsp
+								.imgbox
+									img(src="#{item.bcgimg}")
+								.btninfo: a(href="/good/#{item._id}") #{item.goodname}
+								span.price ¥#{item.price}
+					nav.page
+						ul.pagination
+							each page in pages
+								li.pages
+									a(href="/?page=#{page}&typename=#{typename}") #{page}
+
+

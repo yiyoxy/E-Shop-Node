@@ -1,0 +1,62 @@
+extends ./admin
+
+block content
+	.col-md-10
+		.row
+			a.btn.btn-success(href="#",data-toggle="modal",data-target="#signupModal1",style="margin-top:10px") 添加商品+
+			table.table.table-hover.table-bordered(style="margin-top:10px")
+				thead
+					tr
+						th 商品名称
+						th 录入时间
+						th 查看
+						th 修改
+						th.text-center 删除
+				tbody
+					each item in goods
+						tr(class="item-id-#{item._id}")
+							td #{item.goodname}
+							td #{moment(item.meta.updateAt).format('MM/DD/YYYY')}
+							td: a(href="/good/#{item._id}") 查看
+							td: a(href="/admin/update/#{item._id}") 修改
+							td
+								button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除
+			nav.page
+				ul.pagination
+					each page in pages
+						li.pages
+							a(href="/admin/goodlist?page=#{page}") #{page}
+	#signupModal1.modal.fade
+		.modal-dialog
+			.modal-content
+				form(method="POST",action="/admin/good/new")
+					.modal-header.text-danger 商品录入
+					.modal-body
+						input(type="hidden",name="good[_id]",value="#{good._id}")
+						.form-group
+							label(for="inputType") 商品类型
+							select.form-control(name="good[typename]")
+								each item in types
+									option #{item.typename}
+						.form-group
+							label(for="inputGoodname") 商品名称
+							input#inputGoodname.form-control(name="good[goodname]",type="text",value="#{good.goodname}")
+						.form-group
+							label(for="inputLabel") 备注信息
+							input#inputLabel.form-control(name="good[label]",type="text",value="#{good.label}")
+						.form-group
+							label(for="inputBcgimg") 图片地址
+							input#inputBcgimg.form-control(name="good[bcgimg]",type="text",value="#{good.bcgimg}")
+						.form-group
+							label(for="inputPrice") 价格
+							input#inputPrice.form-control(name="good[price]",type="text",value="#{good.price}")
+						.form-group
+							label(for="inputPostage") 运费
+							input#inputPostage.form-control(name="good[postage]",type="text",value="#{good.postage}")
+						.modal-footer
+							.row
+								.col-md-6.text-center
+									button.btn.btn-lg.btn-primary(type="submit") 录入
+								.col-md-6.text-center
+									button.btn.btn-lg.btn-danger(data-dismiss="modal",type="button") 关闭
+				script(src='/libs/js/goodlist.js')
